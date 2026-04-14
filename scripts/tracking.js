@@ -379,8 +379,8 @@ function initializeModal() {
     }
   });
 
-  // Attach openModal to CTA buttons
-  document.querySelectorAll('[data-cta-button]').forEach(button => {
+  // Attach openModal to pricing CTA buttons ONLY (.plan-cta)
+  document.querySelectorAll('.plan-cta[data-cta-button]').forEach(button => {
     button.addEventListener('click', function(e) {
       e.preventDefault();
       const plan = this.getAttribute('data-plan');
