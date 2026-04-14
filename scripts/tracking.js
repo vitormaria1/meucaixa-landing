@@ -315,11 +315,16 @@ function initializeModal() {
 
   // Form submission
   submitBtn.addEventListener('click', async function() {
+    console.log('📝 Submit button clicado');
     const email = emailInput.value.trim();
     const whatsapp = whatsappInput.value.trim();
 
+    console.log('Validando email:', email);
+    console.log('Validando whatsapp:', whatsapp);
+
     // Validação
     if (!email) {
+      console.warn('❌ Email vazio');
       trackFormError('empty_email');
       emailInput.classList.add('input-error');
       emailInput.focus();
@@ -327,6 +332,7 @@ function initializeModal() {
     }
 
     if (!validateEmail(email)) {
+      console.warn('❌ Email inválido');
       trackFormError('invalid_email');
       emailInput.classList.add('input-error');
       emailInput.focus();
@@ -334,6 +340,7 @@ function initializeModal() {
     }
 
     if (!whatsapp) {
+      console.warn('❌ WhatsApp vazio');
       trackFormError('empty_whatsapp');
       whatsappInput.classList.add('input-error');
       whatsappInput.focus();
@@ -341,17 +348,21 @@ function initializeModal() {
     }
 
     if (!validateWhatsApp(whatsapp)) {
+      console.warn('❌ WhatsApp inválido');
       trackFormError('invalid_whatsapp');
       whatsappInput.classList.add('input-error');
       whatsappInput.focus();
       return;
     }
 
+    console.log('✅ Validação passou!');
+
     // Remove error classes
     emailInput.classList.remove('input-error');
     whatsappInput.classList.remove('input-error');
 
     // Track lead capture
+    console.log('📊 Enviando lead capture para N8N...');
     await trackLeadCapture(email, whatsapp, selectedPlan);
 
     // Close modal
@@ -359,10 +370,17 @@ function initializeModal() {
 
     // Redirect to Asaas
     const asaasLink = TRACKING_CONFIG.ASAAS_LINKS[selectedPlan];
+    console.log('🔗 Plano selecionado:', selectedPlan);
+    console.log('🔗 Link Asaas:', asaasLink);
+
     if (asaasLink) {
+      console.log('⏳ Aguardando 500ms antes de redirecionar...');
       setTimeout(() => {
+        console.log('🚀 Redirecionando para:', asaasLink);
         window.location.href = asaasLink;
-      }, 100); // Small delay para garantir que N8N recebeu
+      }, 500); // Delay maior para garantir que N8N recebeu e Meta foi notificado
+    } else {
+      console.error('❌ Asaas link não encontrado para plano:', selectedPlan);
     }
   });
 
@@ -380,10 +398,16 @@ function initializeModal() {
   });
 
   // Attach openModal to pricing CTA buttons ONLY (.plan-cta)
-  document.querySelectorAll('.plan-cta[data-cta-button]').forEach(button => {
+  const ctaButtons = document.querySelectorAll('.plan-cta[data-cta-button]');
+  console.log('🔘 Encontrados', ctaButtons.length, 'botões de CTA');
+
+  ctaButtons.forEach((button, index) => {
+    const plan = button.getAttribute('data-plan');
+    console.log(`  → Botão ${index + 1}: plano="${plan}"`);
+
     button.addEventListener('click', function(e) {
       e.preventDefault();
-      const plan = this.getAttribute('data-plan');
+      console.log('🖱️ Clicou em botão CTA, abrindo modal para plano:', plan);
       trackButtonClick(`cta_${plan}`);
       openModal(plan);
     });
