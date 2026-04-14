@@ -274,6 +274,9 @@ function formatWhatsApp(value) {
 }
 
 // ==================== MODAL ====================
+// Store selected plan globally so it doesn't get lost
+let globalSelectedPlan = null;
+
 function initializeModal() {
   const modal = document.getElementById('lead-capture-modal');
   const overlay = document.getElementById('modal-overlay');
@@ -283,19 +286,17 @@ function initializeModal() {
   const emailInput = document.getElementById('modal-email');
   const whatsappInput = document.getElementById('modal-whatsapp');
 
-  // Store selected plan
-  let selectedPlan = null;
-
   // Close modal function
   function closeModal() {
     modal.style.display = 'none';
     overlay.style.display = 'none';
-    selectedPlan = null;
+    globalSelectedPlan = null;
   }
 
   // Open modal function
   function openModal(plan) {
-    selectedPlan = plan;
+    globalSelectedPlan = plan;
+    console.log('📋 Modal aberto para plano:', plan);
     modal.style.display = 'block';
     overlay.style.display = 'block';
     emailInput.value = '';
@@ -356,6 +357,7 @@ function initializeModal() {
     }
 
     console.log('✅ Validação passou!');
+    console.log('📋 Plano global:', globalSelectedPlan);
 
     // Remove error classes
     emailInput.classList.remove('input-error');
@@ -363,15 +365,15 @@ function initializeModal() {
 
     // Track lead capture
     console.log('📊 Enviando lead capture para N8N...');
-    await trackLeadCapture(email, whatsapp, selectedPlan);
+    await trackLeadCapture(email, whatsapp, globalSelectedPlan);
+
+    // Redirect to Asaas (ANTES de fechar o modal)
+    const asaasLink = TRACKING_CONFIG.ASAAS_LINKS[globalSelectedPlan];
+    console.log('🔗 Plano selecionado:', globalSelectedPlan);
+    console.log('🔗 Link Asaas:', asaasLink);
 
     // Close modal
     closeModal();
-
-    // Redirect to Asaas
-    const asaasLink = TRACKING_CONFIG.ASAAS_LINKS[selectedPlan];
-    console.log('🔗 Plano selecionado:', selectedPlan);
-    console.log('🔗 Link Asaas:', asaasLink);
 
     if (asaasLink) {
       console.log('⏳ Aguardando 500ms antes de redirecionar...');
