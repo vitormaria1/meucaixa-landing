@@ -51,25 +51,6 @@ async function sha256(str) {
   return hashHex;
 }
 
-// ==================== DEDUPLICATION ====================
-const eventCache = new Map();
-
-function shouldSendEvent(externalId, eventType, identifier = null) {
-  const key = `${externalId}_${eventType}_${identifier || 'generic'}`;
-  const now = Date.now();
-
-  if (eventCache.has(key)) {
-    const lastTime = eventCache.get(key);
-    if (now - lastTime < TRACKING_CONFIG.DEDUP_TIMEOUT) {
-      console.log('⚠️ Evento duplicado (ignorado):', key);
-      return false;
-    }
-  }
-
-  eventCache.set(key, now);
-  console.log('✅ Evento registrado:', key);
-  return true;
-}
 
 // ==================== DETECT DEVICE ====================
 function getDeviceInfo() {
@@ -133,10 +114,6 @@ function getUTMParams() {
 async function trackPageView() {
   const sessionId = getOrCreateSessionId();
 
-  if (!shouldSendEvent(sessionId, 'pageview')) {
-    return;
-  }
-
   const deviceInfo = getDeviceInfo();
   const ip = await getClientIP();
   const utm = getUTMParams();
@@ -164,10 +141,6 @@ async function trackPageView() {
 function trackButtonClick(buttonId) {
   const sessionId = getOrCreateSessionId();
 
-  if (!shouldSendEvent(sessionId, 'button_click', buttonId)) {
-    return;
-  }
-
   const deviceInfo = getDeviceInfo();
   const utm = getUTMParams();
 
@@ -190,10 +163,6 @@ function trackButtonClick(buttonId) {
 // ==================== LEAD CAPTURE TRACKING ====================
 async function trackLeadCapture(email, whatsapp, plan) {
   const sessionId = getOrCreateSessionId();
-
-  if (!shouldSendEvent(sessionId, 'lead_capture', plan)) {
-    return;
-  }
 
   // Hash email e whatsapp
   const emailHash = await sha256(email);
