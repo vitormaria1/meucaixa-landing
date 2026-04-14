@@ -431,8 +431,8 @@ function initializeModal() {
 
     button.addEventListener('click', function(e) {
       e.preventDefault();
-      console.log('🖱️ Clicou em botão CTA, abrindo modal para plano:', plan);
-      trackButtonClick(`cta_${plan}`);
+      console.log('📋 Abrindo modal para plano:', plan);
+      // Nota: webhook será enviado apenas quando o form for preenchido
       openModal(plan);
     });
   });
