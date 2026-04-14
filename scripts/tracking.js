@@ -110,6 +110,22 @@ function getUTMParams() {
   };
 }
 
+// ==================== GET META COOKIES ====================
+function getMetaCookies() {
+  // Meta Pixel cria cookies _fbc e _fbp automaticamente
+  const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+  };
+
+  return {
+    fbc: getCookie('_fbc'),
+    fbp: getCookie('_fbp')
+  };
+}
+
 // ==================== PAGEVIEW TRACKING ====================
 async function trackPageView() {
   const sessionId = getOrCreateSessionId();
@@ -117,6 +133,7 @@ async function trackPageView() {
   const deviceInfo = getDeviceInfo();
   const ip = await getClientIP();
   const utm = getUTMParams();
+  const metaCookies = getMetaCookies();
 
   const payload = {
     external_id: sessionId,
@@ -130,7 +147,9 @@ async function trackPageView() {
     device_type: deviceInfo.device,
     browser: deviceInfo.browser,
     ip: ip,
-    user_agent: deviceInfo.ua
+    user_agent: deviceInfo.ua,
+    fbc: metaCookies.fbc,
+    fbp: metaCookies.fbp
   };
 
   console.log('📊 Pageview:', payload);
@@ -171,6 +190,7 @@ async function trackLeadCapture(email, whatsapp, plan) {
   const deviceInfo = getDeviceInfo();
   const ip = await getClientIP();
   const utm = getUTMParams();
+  const metaCookies = getMetaCookies();
 
   // Determinar valor baseado no plano
   const planValues = {
@@ -207,7 +227,9 @@ async function trackLeadCapture(email, whatsapp, plan) {
     device_type: deviceInfo.device,
     browser: deviceInfo.browser,
     ip: ip,
-    user_agent: deviceInfo.ua
+    user_agent: deviceInfo.ua,
+    fbc: metaCookies.fbc,
+    fbp: metaCookies.fbp
   };
 
   console.log('📝 Lead capture:', payload);

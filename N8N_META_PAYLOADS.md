@@ -27,12 +27,15 @@ https://graph.facebook.com/v18.0/876977525291177/events
       "event_source_url": "{{ $json.body.page_url }}",
       "user_data": {
         "external_id": "{{ $json.body.external_id }}",
-        "ip": "{{ $json.body.ip }}",
-        "ua": "{{ $json.body.user_agent }}"
+        "fbc": "{{ $json.body.fbc }}",
+        "fbp": "{{ $json.body.fbp }}",
+        "client_ip_address": "{{ $json.body.ip }}",
+        "client_user_agent": "{{ $json.body.user_agent }}"
       },
       "custom_data": {
         "content_name": "MeuCaixa",
-        "content_type": "product"
+        "content_type": "product",
+        "content_category": "landing_page"
       }
     }
   ],
@@ -74,8 +77,10 @@ https://graph.facebook.com/v18.0/876977525291177/events
         "external_id": "{{ $json.body.external_id }}",
         "em": "{{ $json.body.user_data.email_hash }}",
         "ph": "{{ $json.body.user_data.whatsapp_hash }}",
-        "ip": "{{ $json.body.ip }}",
-        "ua": "{{ $json.body.user_agent }}"
+        "fbc": "{{ $json.body.fbc }}",
+        "fbp": "{{ $json.body.fbp }}",
+        "client_ip_address": "{{ $json.body.ip }}",
+        "client_user_agent": "{{ $json.body.user_agent }}"
       },
       "custom_data": {
         "value": "{{ $json.body.conversion_data.value }}",
