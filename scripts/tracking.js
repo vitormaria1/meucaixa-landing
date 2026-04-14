@@ -112,7 +112,6 @@ function getUTMParams() {
 
 // ==================== GET META COOKIES ====================
 function getMetaCookies() {
-  // Meta Pixel cria cookies _fbc e _fbp automaticamente
   const getCookie = (name) => {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
@@ -120,8 +119,24 @@ function getMetaCookies() {
     return null;
   };
 
+  // Tentar obter _fbc do cookie
+  let fbc = getCookie('_fbc');
+
+  // Se não existir, tentar capturar fbclid da URL
+  if (!fbc) {
+    const params = new URLSearchParams(window.location.search);
+    const fbclid = params.get('fbclid');
+
+    if (fbclid) {
+      // Criar cookie _fbc com o fbclid
+      fbc = `fb.1.${Date.now()}.${fbclid}`;
+      document.cookie = `_fbc=${fbc}; path=/; max-age=${7 * 24 * 60 * 60}`;
+      console.log('📍 FBC criado a partir de fbclid:', fbc);
+    }
+  }
+
   return {
-    fbc: getCookie('_fbc'),
+    fbc: fbc,
     fbp: getCookie('_fbp')
   };
 }
