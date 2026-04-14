@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '876977525291177');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=876977525291177&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeuCaixa - Controle Financeiro Inteligente com WhatsApp e IA</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%233b82f6'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='white' font-family='Arial, sans-serif' font-weight='bold'%3E$%3C/text%3E%3Crect x='65' y='65' width='28' height='18' rx='3' fill='%2310b981'/%3E%3Ctext x='79' y='77' font-size='10' text-anchor='middle' fill='white' font-family='Arial, sans-serif' font-weight='bold'%3EAI%3C/text%3E%3C/svg%3E">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #334155;
+            background: #ffffff;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 40px;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5em;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .logo-symbol {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+            position: relative;
+        }
+
+        .logo-ai-badge {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            background: #10b981;
+            color: white;
+            font-size: 0.35em;
+            font-weight: 700;
+            padding: 3px 6px;
+            border-radius: 4px;
+            border: 2px solid white;
+        }
+
+        .logo-text {
+            color: #0f172a;
+        }
+
+        .logo-text .meu {
+            font-weight: 600;
+        }
+
+        .logo-text .caixa {
+            color: #3b82f6;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            color: #475569;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95em;
+            transition: all 0.2s;
+        }
+
+        .nav-menu a:hover {
+            color: #3b82f6;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 40px;
+            background: #f8fafc;
+        }
+
+        .hero-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text .badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.875em;
+            font-weight: 600;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5em;
+            font-weight: 900;
+            line-height: 1.1;
+            color: #0f172a;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-text h1 .highlight {
+            color: #10b981;
+        }
+
+        .hero-text p {
+            font-size: 1.25em;
+            color: #64748b;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 18px 40px;
+            font-size: 1.1em;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .hero-cta:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-visual img {
+            width: 100%;
+            max-width: 280px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Section */
+        section {
+            padding: 100px 40px;
+        }
+
+        .section-light {
+            background: #ffffff;
+        }
+
+        .section-dark {
+            background: #f8fafc;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .section-content h2 {
+            font-size: 2.75em;
+            font-weight: 900;
+            color: #0f172a;
+            margin-bottom: 24px;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .section-content h2 .highlight {
+            color: #10b981;
+        }
+
+        .section-content p {
+            font-size: 1.15em;
+            color: #64748b;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .check-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .check-list li {
+            padding: 12px 0;
+            font-size: 1.05em;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .check-list li::before {
+            content: '✓';
+            color: #10b981;
+            font-weight: 700;
+            font-size: 1.3em;
+            flex-shrink: 0;
+        }
+
+        .section-image {
+            text-align: center;
+        }
+
+        .section-image img {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Stats Banner */
+        .stats-banner {
+            background: #10b981;
+            padding: 60px 40px;
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            text-align: center;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 16px;
+        }
+
+        .stat-icon {
+            font-size: 3em;
+            margin-bottom: 16px;
+        }
+
+        .stat-card h3 {
+            font-size: 1.15em;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        .stat-card p {
+            font-size: 0.95em;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Pricing */
+        .pricing {
+            padding: 100px 40px;
+            background: #f8fafc;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .pricing-header h2 {
+            font-size: 2.75em;
+            font-weight: 900;
+            color: #0f172a;
+            margin-bottom: 16px;
+        }
+
+        .pricing-header p {
+            font-size: 1.2em;
+            color: #64748b;
+        }
+
+        .pricing-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+
+        .pricing-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.15);
+        }
+
+        .pricing-card.featured {
+            border-color: #10b981;
+            position: relative;
+            background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #10b981;
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .plan-name {
+            font-size: 1.5em;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+
+        .plan-price {
+            font-size: 2.75em;
+            font-weight: 900;
+            color: #0f172a;
+            margin-bottom: 6px;
+            line-height: 1;
+        }
+
+        .plan-price span {
+            font-size: 0.35em;
+            font-weight: 500;
+            color: #64748b;
+        }
+
+        .plan-economy {
+            color: #10b981;
+            font-weight: 600;
+            font-size: 0.9em;
+            margin-bottom: 24px;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin: 24px 0;
+        }
+
+        .plan-features li {
+            padding: 10px 0;
+            color: #475569;
+            font-size: 0.95em;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+
+        .plan-features li::before {
+            content: '✓';
+            color: #10b981;
+            font-weight: 700;
+            font-size: 1.2em;
+            flex-shrink: 0;
+        }
+
+        .plan-cta {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: #3b82f6;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.05em;
+            transition: all 0.2s;
+            margin-top: 24px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .plan-cta:hover {
+            background: #2563eb;
+        }
+
+        .pricing-card.featured .plan-cta {
+            background: #10b981;
+        }
+
+        .pricing-card.featured .plan-cta:hover {
+            background: #059669;
+        }
+
+        /* Modal Styles */
+        #modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        #lead-capture-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            z-index: 1001;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-header h2 {
+            font-size: 1.75em;
+            font-weight: 800;
+            color: #0f172a;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #94a3b8;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: #0f172a;
+        }
+
+        .modal-body {
+            margin-bottom: 24px;
+        }
+
+        .modal-body p {
+            color: #64748b;
+            font-size: 0.95em;
+            margin: 0 0 20px 0;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: all 0.2s;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-group input.input-error {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+
+        .form-group input.input-error:focus {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 12px;
+            flex-direction: row-reverse;
+        }
+
+        #modal-back-btn {
+            flex: 1;
+            padding: 12px 20px;
+            background: #f1f5f9;
+            color: #475569;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #modal-back-btn:hover {
+            background: #e2e8f0;
+        }
+
+        #modal-submit-btn {
+            flex: 1;
+            padding: 12px 20px;
+            background: #10b981;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        #modal-submit-btn:hover {
+            background: #059669;
+        }
+
+        @media (max-width: 768px) {
+            #lead-capture-modal {
+                padding: 24px;
+                width: 95%;
+            }
+
+            .modal-header h2 {
+                font-size: 1.5em;
+            }
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 100px 40px;
+            background: white;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .faq-header h2 {
+            font-size: 2.75em;
+            font-weight: 900;
+            color: #0f172a;
+            margin-bottom: 16px;
+        }
+
+        .faq-list {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: #f8fafc;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .faq-question {
+            padding: 24px 28px;
+            font-weight: 700;
+            color: #0f172a;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.05em;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.8em;
+            color: #3b82f6;
+            font-weight: 300;
+        }
+
+        .faq-answer {
+            padding: 0 28px 24px;
+            color: #64748b;
+            line-height: 1.7;
+            font-size: 1em;
+            display: none;
+        }
+
+        /* CTA Final */
+        .cta-final {
+            padding: 100px 40px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-final h2 {
+            font-size: 3em;
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .cta-final p {
+            font-size: 1.25em;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .cta-final .hero-cta {
+            background: white;
+            color: #3b82f6;
+        }
+
+        .cta-final .hero-cta:hover {
+            background: #f8fafc;
+        }
+
+        /* Footer */
+        footer {
+            padding: 48px 40px;
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+        }
+
+        footer a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+
+            .hero-content,
+            .section-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.75em;
+            }
+
+            .section-content h2 {
+                font-size: 2.25em;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 16px 20px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.25em;
+            }
+
+            .section-content h2 {
+                font-size: 2em;
+            }
+
+            .plan-price {
+                font-size: 2.75em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">
+                <div class="logo-symbol">
+                    $
+                    <div class="logo-ai-badge">AI</div>
+                </div>
+                <span class="logo-text">
+                    <span class="meu">Meu</span><span class="caixa">Caixa</span>
+                </span>
+            </a>
+            <nav class="nav-menu">
+                <a href="#beneficios">Benefícios</a>
+                <a href="#como-funciona">Como Funciona</a>
+                <a href="#precos">Preços</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="badge">SEU ASSISTENTE FINANCEIRO NO WHATSAPP</div>
+                <h1>
+                    Controle Financeiro Inteligente <span class="highlight">Direto no WhatsApp</span>
+                </h1>
+                <p>Gerencie suas finanças de forma simples no WhatsApp com um assistente financeiro inteligente, melhor
+                    do que planilha financeira.</p>
+                <button data-cta-button data-plan="mensal" class="hero-cta">Quero ter um assistente</button>
+            </div>
+            <div class="hero-visual">
+                <img src="https://jfltbluknvirjoizhavf.supabase.co/storage/v1/object/public/meucaixa/WhatsApp%20Image%202025-10-04%20at%2011.40.14.jpeg"
+                    alt="MeuCaixa WhatsApp" crossorigin="anonymous" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1 -->
+    <section class="section-light" id="beneficios">
+        <div class="container">
+            <div class="section-grid">
+                <div class="section-image">
+                    <img src="https://jfltbluknvirjoizhavf.supabase.co/storage/v1/object/public/meucaixa/WhatsApp%20Image%202025-10-04%20at%2011.40.14%20(1).jpeg"
+                        alt="Interface do Chat" crossorigin="anonymous" loading="lazy">
+                </div>
+                <div class="section-content">
+                    <h2>O Melhor Assistente Financeiro Pessoal <span class="highlight">Do Brasil</span></h2>
+                    <p>Controle seu tempo e seu dinheiro de forma simples. Com o MeuCaixa, você controla suas finanças
+                        sem sair do WhatsApp. Basta enviar uma mensagem e seus ganhos e despesas são registrados
+                        automaticamente.</p>
+                    <ul class="check-list">
+                        <li>Registre ganhos e despesas por texto ou áudio</li>
+                        <li>Categorização automática e inteligente</li>
+                        <li>Tudo salvo direto no WhatsApp, sem complicação</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section class="section-dark" id="como-funciona">
+        <div class="container">
+            <div class="section-content" style="max-width: 900px; margin: 0 auto; text-align: center;">
+                <h2><span class="highlight">Tempo é dinheiro!</span> E você não pode perder nenhum dos dois</h2>
+                <p>Já se sentiu sobrecarregado com tantas tarefas, contas e compromissos? A fatura do cartão chegou e
+                    você nem sabe onde foi parar o seu dinheiro? A verdade é que, no corre do dia a dia, planilhas,
+                    agendas e apps complicados só atrapalham. Enquanto o tempo passa, o seu dinheiro escorre pelos
+                    dedos.</p>
+                <p>Foi por isso que criamos o <strong>MeuCaixa</strong>: um assistente financeiro no WhatsApp que cuida
+                    das suas finanças e compromissos como se fosse seu braço direito. Simples, direto e sempre à mão.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Banner -->
+    <div class="stats-banner">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">🔒</div>
+                <h3>Criptografia de Ponta a Ponta</h3>
+                <p>O MeuCaixa garante máxima segurança e privacidade para suas informações financeiras</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🧠</div>
+                <h3>99,9% de Precisão</h3>
+                <p>Nossa IA Avançada garante 99.9% de assertividade nas respostas com total precisão nos dados</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💬</div>
+                <h3>Crie e Edite Transações</h3>
+                <p>Edite facilmente suas transações e gastos apenas enviando uma mensagem no WhatsApp</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pricing -->
+    <section class="pricing" id="precos">
+        <div class="container">
+            <div class="pricing-header">
+                <h2>Comece a organizar suas finanças</h2>
+                <p>Escolha o plano ideal para você</p>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Mensal</div>
+                    <div class="plan-price">R$ 39,90<span>/mês</span></div>
+
+                    <ul class="plan-features">
+                        <li>IA completa no WhatsApp</li>
+                        <li>Lembretes automáticos</li>
+                        <li>Dashboard web completo</li>
+                        <li>Gráficos e relatórios</li>
+                        <li>Categorização automática</li>
+                        <li>Exportação de dados</li>
+                        <li>Suporte dedicado</li>
+                        <li>7 dias de garantia</li>
+                    </ul>
+
+                    <button data-cta-button data-plan="mensal" class="plan-cta">Comprar agora</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="featured-badge">Mais Escolhido</div>
+                    <div class="plan-name">Anual</div>
+                    <div class="plan-price">R$ 29,90<span>/mês</span></div>
+                    <div class="plan-economy">Economia de R$ 120,00 por ano</div>
+
+                    <ul class="plan-features">
+                        <li>IA completa no WhatsApp</li>
+                        <li>Lembretes automáticos</li>
+                        <li>Dashboard web completo</li>
+                        <li>Gráficos e relatórios</li>
+                        <li>Categorização automática</li>
+                        <li>Exportação de dados</li>
+                        <li>Suporte dedicado</li>
+                        <li>7 dias de garantia</li>
+                    </ul>
+
+                    <button data-cta-button data-plan="anual" class="plan-cta">Comprar agora</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="faq-header">
+                <h2>Perguntas Frequentes</h2>
+            </div>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">Como funciona o MeuCaixa?</div>
+                    <div class="faq-answer">Você simplesmente envia uma mensagem com suas despesas ou receitas, e a IA
+                        cuida do resto! Organizando, categorizando e gerando relatórios automaticamente.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Posso enviar áudio ou foto?</div>
+                    <div class="faq-answer">Sim! Além de texto, você pode enviar mensagens de áudio, fotos de
+                        comprovantes ou até PDFs. Nossa IA entende tudo.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Como funciona a categorização?</div>
+                    <div class="faq-answer">O MeuCaixa categoriza seus gastos automaticamente em diversas áreas, como
+                        alimentação, transporte, moradia e muito mais.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Meus dados estão seguros?</div>
+                    <div class="faq-answer">Sim! Priorizamos a segurança dos seus dados e garantimos total privacidade.
+                        Utilizamos criptografia de ponta a ponta do WhatsApp.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Posso cancelar quando quiser?</div>
+                    <div class="faq-answer">Sim! Não há fidelidade. Você pode cancelar sua assinatura a qualquer momento
+                        sem multas ou taxas adicionais.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Tem garantia?</div>
+                    <div class="faq-answer">Sim! Oferecemos 7 dias de garantia. Se não ficar satisfeito, devolvemos seu
+                        dinheiro sem perguntas.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="cta-final">
+        <div class="container">
+            <h2>Pronto para organizar suas finanças?</h2>
+            <p>Comece agora e tenha total controle do seu dinheiro</p>
+            <button data-cta-button data-plan="mensal" class="hero-cta">Quero ter um assistente</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p style="font-size: 1.1em; margin-bottom: 12px;"><strong>MeuCaixa</strong> - Controle Financeiro
+                Inteligente</p>
+            <p>Suporte: <a href="/cdn-cgi/l/email-protection#1e737b6b7d7f77667f6d6b6e716c6a7b5e79737f7772307d7173"><span
+                        class="__cf_email__"
+                        data-cfemail="89e4ecfceae8e0f1e8fafcf9e6fbfdecc9eee4e8e0e5a7eae6e4">[email&#160;protected]</span></a>
+            </p>
+            <p style="margin-top: 32px; font-size: 0.9em;">© 2025 MeuCaixa. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal Overlay -->
+    <div id="modal-overlay"></div>
+
+    <!-- Lead Capture Modal -->
+    <div id="lead-capture-modal">
+        <div class="modal-header">
+            <h2>Começar Agora</h2>
+            <button class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>Preencha seus dados para acessar seu novo assistente financeiro:</p>
+
+            <div class="form-group">
+                <label for="modal-email">Email</label>
+                <input
+                    type="email"
+                    id="modal-email"
+                    placeholder="seu@email.com"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="modal-whatsapp">WhatsApp</label>
+                <input
+                    type="tel"
+                    id="modal-whatsapp"
+                    placeholder="(11) 99999-9999"
+                    required
+                >
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button id="modal-submit-btn">Continuar para compra</button>
+            <button id="modal-back-btn">Voltar</button>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // FAQ toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function () {
+                const answer = this.nextElementSibling;
+                const isOpen = answer.style.display === 'block';
+
+                document.querySelectorAll('.faq-answer').forEach(a => a.style.display = 'none');
+
+                if (!isOpen) {
+                    answer.style.display = 'block';
+                }
+            });
+        });
+    </script>
+
+    <!-- Tracking System -->
+    <script src="scripts/tracking.js"></script>
+</body>
+
+</html>
